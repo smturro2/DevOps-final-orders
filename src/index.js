@@ -38,7 +38,8 @@ index.post('/orders', async (req, res) => {
         const { productId, quantity } = req.body;
 
         // Verify product exists (call product service)
-        const productResponse = await axios.get(`http://product-service:3001/products/${productId}`);
+        const productHost = process.env.PRODUCT_HOST || 'localhost';
+        const productResponse = await axios.get(`http://${productHost}:3001/products/${productId}`);
         const product = productResponse.data;
 
         const totalPrice = product.price * quantity;
