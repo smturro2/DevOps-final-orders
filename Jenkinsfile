@@ -2,9 +2,11 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_REGISTRY = "your-docker-DOCKER_REGISTRY"
-        DOCKER_NAME = "devops-final-web"
-        DOCKER_TAG = "${env.BUILD_NUMBER}"
+        DOCKERHUB_CREDENTIALS = credentials("dockerhub")
+        DOCKER_REGISTRY = "denture8278"
+        DOCKER_NAME = "devops-final-prder"
+        // DOCKER_TAG = "${env.BUILD_NUMBER}"  // todo
+        DOCKER_TAG = "latest"
     }
 
     stages {
@@ -46,7 +48,9 @@ pipeline {
                     utils.pushDocker(
                         DOCKER_REGISTRY, 
                         DOCKER_NAME, 
-                        DOCKER_TAG
+                        DOCKER_TAG,
+                        DOCKERHUB_CREDENTIALS_USR,
+                        DOCKERHUB_CREDENTIALS_PSW,
                     )
                 }
             }
@@ -59,6 +63,12 @@ pipeline {
                     )
                 }
             }
+        }
+    }
+
+    post {
+        always {
+            sh 'docker logout'
         }
     }
 }
