@@ -85,3 +85,5 @@ const PORT = process.env.PORT || 3002;
 index.listen(PORT, () => {
     console.log(`Order service running on port ${PORT}`);
 });
+
+module.exports = index;
