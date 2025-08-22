@@ -10,6 +10,18 @@ pipeline {
     }
 
     stages {
+        // todo remove
+        stage('Debug') {
+            steps {
+                script {
+                    sh 'whoami'
+                    sh 'env'
+                    sh 'docker --version'
+                    sh 'docker ps'
+                    echo "Branch name is: ${env.BRANCH_NAME}"
+                }
+            }
+        }
         stage('Build') {
             steps {
                 script {
@@ -59,7 +71,7 @@ pipeline {
             steps {
                 script {
                     utils.conditionalDeployment(
-                        env.branchName
+                        env.BRANCH_NAME
                     )
                 }
             }
