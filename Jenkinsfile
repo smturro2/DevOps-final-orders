@@ -4,9 +4,9 @@ pipeline {
     environment {
         DOCKERHUB_CREDENTIALS = credentials("dockerhub")
         DOCKER_REGISTRY = "denture8278"
-        DOCKER_NAME = "devops-final-prder"
-        // DOCKER_TAG = "${env.BUILD_NUMBER}"  // todo
-        DOCKER_TAG = "latest"
+        DOCKER_NAME = "devops-final-order"
+        DOCKER_TAG = "${env.BUILD_NUMBER}"  // todo
+        DOCKER_TAG = "v1.1"
     }
 
     stages {
