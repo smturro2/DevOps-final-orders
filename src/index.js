@@ -9,7 +9,7 @@ index.use(express.json());
 
 // Database connection
 const pool = new Pool({
-    host: process.env.DB_HOST || 'localhost',
+    host: process.env.DB_HOST || 'db',
     database: process.env.DB_NAME || 'ecommerce',
     user: process.env.DB_USER || 'postgres',
     password: process.env.DB_PASSWORD || 'password',
@@ -38,7 +38,7 @@ index.post('/orders', async (req, res) => {
         const { productId, quantity } = req.body;
 
         // Verify product exists (call product service)
-        const productHost = process.env.PRODUCT_HOST || 'localhost';
+        const productHost = process.env.PRODUCT_HOST || 'products';
         const productResponse = await axios.get(`http://${productHost}:3001/products/${productId}`);
         const product = productResponse.data;
 
